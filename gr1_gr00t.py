@@ -16,6 +16,8 @@ import isaacsim.core.utils.numpy.rotations as rot_utils
 from isaacsim.core.api.objects import DynamicCuboid
 import matplotlib.pyplot as plt
 import gr1_config
+import gr1_gr00t_utils
+
 
 
 def main():
@@ -83,30 +85,44 @@ def main():
     
     ## 3. run simulation
     print("## 3. run simulation")
-    world.reset()
-    gr1.set_world_pose(np.array([0,0,0.95])) # must set world position here!
-    gr1.set_joint_positions(positions=gr1_config.default_joint_position)
-    table.set_world_poses(positions=np.array([[0.53,0,0]]),
-                          orientations=rot_utils.euler_angles_to_quats(np.array([0, 0, 90.0]), degrees=True).reshape((1,4)))
+    PROMPT = "pick up the blue cube"
+    for simulation_num in range(5):
+        print(f"Starting simulation {simulation_num}")
+        world.reset()
+        gr1.set_world_pose(np.array([0,0,0.95])) # must set world position here!
+        gr1.set_joint_positions(positions=gr1_config.default_joint_position)
+        table.set_world_poses(positions=np.array([[0.53,0,0]]),
+                            orientations=rot_utils.euler_angles_to_quats(np.array([0, 0, 90.0]), degrees=True).reshape((1,4)))
 
 
-    # first, just initialize the world and wait
-    for step in range(100):
-        world.step(render=True)
-    # for the actual simulation
-    for step in range(1000):
-        current_joint_positions = gr1.get_joint_positions()
-        #gr1_articulation_controller.apply_action(ArticulationAction(joint_positions=gr1_config.default_joint_position))
-        #print(f"Current joint positions: {joint_positions}")
-        world.step(render=True)
-        obs: np.ndarray = camera.get_rgba()
-                
+        # first, just initialize the world and wait
+        print("Waiting to initialize")
+        for step in range(100):
+            world.step(render=True)
+        # for the actual simulation
         
-    print("Joint Positions: " + str(gr1.get_joint_positions()))
-        
-    print("Simulation finished")
+        print("Start Simulation")
+        for step in range(20):
+            current_joint_positions = gr1.get_joint_positions()
+            world.step(render=True)
+            obs: np.ndarray = camera.get_rgba()
+            
+            # inference to gr00t server
+            print(f"Simulation {simulation_num} step {step} calling gr00t inference")
+            gr00t_inference_input = gr1_gr00t_utils.make_gr00t_input(task=PROMPT, obs=obs[:,:,:3], joint_positions=current_joint_positions)
+            gr00t_output = gr1_gr00t_utils.request_gr00t_inference(payload=gr00t_inference_input, url="http://localhost:9876/inference")
+            
+            for timestep in range(16):
+                action_joint_position = gr1_gr00t_utils.make_joint_position_from_gr00t_output(gr00t_output, timestep=timestep)
+                gr1_articulation_controller.apply_action(ArticulationAction(joint_positions=action_joint_position))
+                world.step(render=True)
+                        
+        print(f"Simulation {simulation_num} finished")
     simulation_app.close()
     
+    
+    
+
 
 
 
@@ -116,6 +132,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-

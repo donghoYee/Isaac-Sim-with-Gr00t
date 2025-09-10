@@ -170,8 +170,13 @@ def make_joint_position(joint_name_to_angle: dict) -> np.ndarray:
     
 default_joint_position = make_joint_position(joint_name_to_angle=gr1_default_pose)
 
+
+        
+
+
+
+
 if __name__ == "__main__":
     print(gr00t_joints_index)
-    print(default_joint_position)
     # {'left_arm': [12, 17, 22, 24, 26, 28, 30], 'right_arm': [13, 18, 23, 25, 27, 29, 31], 'left_hand': [34, 35, 33, 32, 36, 46], 'right_hand': [39, 40, 38, 37, 41, 51]}
-    
+    print(default_joint_position)
