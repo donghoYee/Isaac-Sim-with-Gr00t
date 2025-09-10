@@ -119,3 +119,4 @@ gr00t_joints_index = {
 
 if __name__ == "__main__":
     print(gr00t_joints_index)
+    # {'left_arm': [12, 17, 22, 24, 26, 28, 30], 'right_arm': [13, 18, 23, 25, 27, 29, 31], 'left_hand': [34, 35, 33, 32, 36, 46], 'right_hand': [39, 40, 38, 37, 41, 51]}
