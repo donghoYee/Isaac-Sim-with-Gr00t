@@ -1,3 +1,4 @@
+import numpy as np  
   
 gr1_gr00t_joint_space = {
     "left_arm": [
@@ -116,7 +117,61 @@ gr00t_joints_index = {
 
 
 
+gr1_default_pose = {
+    "right_shoulder_pitch_joint": 0.0,
+    "right_shoulder_roll_joint": 0.0,
+    "right_shoulder_yaw_joint": 0.0,
+    "right_elbow_pitch_joint": -1.5708,
+    "right_wrist_yaw_joint": 0.0,
+    "right_wrist_roll_joint": 0.0,
+    "right_wrist_pitch_joint": 0.0,
+    # left-arm
+    "left_shoulder_pitch_joint": 0.0,
+    "left_shoulder_roll_joint": 0.0,
+    "left_shoulder_yaw_joint": 0.0,
+    "left_elbow_pitch_joint": -1.5708,
+    "left_wrist_yaw_joint": 0.0,
+    "left_wrist_roll_joint": 0.0,
+    "left_wrist_pitch_joint": 0.0,
+    # right hand
+    "R_index_intermediate_joint": 0.0,
+    "R_index_proximal_joint": 0.0,
+    "R_middle_intermediate_joint": 0.0,
+    "R_middle_proximal_joint": 0.0,
+    "R_pinky_intermediate_joint": 0.0,
+    "R_pinky_proximal_joint": 0.0,
+    "R_ring_intermediate_joint": 0.0,
+    "R_ring_proximal_joint": 0.0,
+    "R_thumb_distal_joint": 0.0,
+    "R_thumb_proximal_pitch_joint": 0.0,
+    "R_thumb_proximal_yaw_joint": -1.57,
+    # left hand
+    "L_index_intermediate_joint": 0.0,
+    "L_index_proximal_joint": 0.0,
+    "L_middle_intermediate_joint": 0.0,
+    "L_middle_proximal_joint": 0.0,
+    "L_pinky_intermediate_joint": 0.0,
+    "L_pinky_proximal_joint": 0.0,
+    "L_ring_intermediate_joint": 0.0,
+    "L_ring_proximal_joint": 0.0,
+    "L_thumb_distal_joint": 0.0,
+    "L_thumb_proximal_pitch_joint": 0.0,
+    "L_thumb_proximal_yaw_joint": -1.57,
+}
+
+
+def make_joint_position(joint_name_to_angle: dict) -> np.ndarray:
+    joint_positions = np.zeros(shape = (54, ), dtype=float)
+    for joint_name, angle in joint_name_to_angle.items():
+        joint_index = gr1_joints_index[joint_name]
+        joint_positions[joint_index] = angle
+        
+    return joint_positions
+    
+default_joint_position = make_joint_position(joint_name_to_angle=gr1_default_pose)
 
 if __name__ == "__main__":
     print(gr00t_joints_index)
+    print(default_joint_position)
     # {'left_arm': [12, 17, 22, 24, 26, 28, 30], 'right_arm': [13, 18, 23, 25, 27, 29, 31], 'left_hand': [34, 35, 33, 32, 36, 46], 'right_hand': [39, 40, 38, 37, 41, 51]}
+    
