@@ -46,6 +46,13 @@ gr1_gr00t_joint_space = {
         # - R_ring_intermediate_joint
         # - R_pinky_intermediate_joint
         # - R_thumb_distal_joint
+    ],
+    
+    
+    "waist": [ # not sure if this ordering is correct
+        "waist_yaw_joint",
+        "waist_pitch_joint",
+        "waist_roll_joint",
     ]
 }
 
@@ -113,6 +120,9 @@ gr00t_joints_index = {
     "right_arm": [gr1_joints_index[gr1_joint_name] for gr1_joint_name in gr1_gr00t_joint_space["right_arm"]],
     "left_hand": [gr1_joints_index[gr1_joint_name] for gr1_joint_name in gr1_gr00t_joint_space["left_hand"]],
     "right_hand": [gr1_joints_index[gr1_joint_name] for gr1_joint_name in gr1_gr00t_joint_space["right_hand"]],
+    
+    "waist": [gr1_joints_index[gr1_joint_name] for gr1_joint_name in gr1_gr00t_joint_space["waist"]],
+    
 }
 
 

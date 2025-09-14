@@ -13,10 +13,11 @@ from isaacsim.core.api.controllers.articulation_controller import ArticulationCo
 from isaacsim.core.utils.types import ArticulationAction
 from isaacsim.sensors.camera.camera import Camera
 import isaacsim.core.utils.numpy.rotations as rot_utils
-from isaacsim.core.api.objects import DynamicCuboid
+from isaacsim.core.api.objects import DynamicCuboid, DynamicCylinder
 import matplotlib.pyplot as plt
 import gr1_config
 import gr1_gr00t_utils
+import cv2
 
 
 
@@ -39,19 +40,24 @@ def main():
         position=np.array([0,0,0.95]),
     ))
     
+    
+    
     gr1_articulation_controller: ArticulationController = gr1.get_articulation_controller()
+    
+    
 
     # adding camera
     camera = Camera(
-        prim_path="/World/camera",
+        prim_path="/World/gr1/head_yaw_link/camera",
         name="camera",
-        position=np.array([0.12, 0.0, 1.55]),
-        frequency=20,
-        resolution=(256, 160),
-        orientation=rot_utils.euler_angles_to_quats(np.array([0, 60, 0]), degrees=True),
+        translation=np.array([0.13, 0.0, 0.07]),
+        frequency=60,
+        resolution=(256, 200),
+        orientation=rot_utils.euler_angles_to_quats(np.array([0, 70, 0]), degrees=True),
     )
-    camera.set_focal_length(1.3) # smaller => wider range of view
+    camera.set_focal_length(1.0) # smaller => wider range of view
     camera.set_clipping_range(0.1, 2)
+    # camera.set_opencv_pinhole_properties(fx=1000, fy=1000)
     
     
     # add table
@@ -63,13 +69,23 @@ def main():
         visibilities=np.array([True,])
     ))
     
-    # add cube for testing
-    cube = scene.add(DynamicCuboid(
-        prim_path="/World/random_cube",
-        name="random_cube",
-        position=np.array([0.5, 0.0, 1.5]),
-        scale=np.array([0.0515, 0.0515, 0.0515]),
-        color=np.array([0, 0, 1.0])))
+    # add prim for testing
+    object = scene.add(DynamicCylinder(
+        prim_path="/World/random_cylinder",
+        name="random_cylinder",
+        position=np.array([0.42, -0.0, 1.2]),
+        scale=np.array([0.025, 0.025, 0.2]),
+        color=np.array([0.2, 0.2, 1.0]),
+        mass = 1,
+    ))
+    
+    # object = scene.add(DynamicCuboid(
+    #     prim_path="/World/random_cube",
+    #     name="random_cube",
+    #     position=np.array([0.4, -0.1, 1.5]),
+    #     scale=np.array([0.06, 0.06, 0.06]),
+    #     color=np.array([0.0, 0.8, 0.0])
+    # ))
     
     
     ## 2. setup_post_load
@@ -80,20 +96,29 @@ def main():
     #print("DOF names: " + str(gr1.dof_names))
     camera.initialize()
     camera.add_motion_vectors_to_frame()
+    
+    
+    gr1_articulation_controller.set_gains(kps = np.array([3000.0]*54), kds = np.array([100.0]*54)) # p is the stiffness, d is the gain
+
 
 
     
     ## 3. run simulation
     print("## 3. run simulation")
-    PROMPT = "pick up the blue cube"
+    PROMPT = "Pickup the blue pipe and put it on the right side"
+    
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
+    video = cv2.VideoWriter(f'./result.mp4', fourcc, 30, (256, 200), isColor=True)
     for simulation_num in range(5):
+        
         print(f"Starting simulation {simulation_num}")
         world.reset()
         gr1.set_world_pose(np.array([0,0,0.95])) # must set world position here!
         gr1.set_joint_positions(positions=gr1_config.default_joint_position)
-        table.set_world_poses(positions=np.array([[0.53,0,0]]),
+        table.set_world_poses(positions=np.array([[0.55,0,0.06]]),
                             orientations=rot_utils.euler_angles_to_quats(np.array([0, 0, 90.0]), degrees=True).reshape((1,4)))
 
+        object.set_world_pose(np.array([0.33 + 0.1 * (np.random.rand() - 0.5), 0.05 +  0.05 * (np.random.rand() - 0.5), 1.2]))
 
         # first, just initialize the world and wait
         print("Waiting to initialize")
@@ -102,22 +127,29 @@ def main():
         # for the actual simulation
         
         print("Start Simulation")
-        for step in range(20):
+        for step in range(30):
             current_joint_positions = gr1.get_joint_positions()
+            #print("current pos")
+            #print(current_joint_positions)
             world.step(render=True)
             obs: np.ndarray = camera.get_rgba()
+            video.write(cv2.cvtColor(obs[:,:,:3], cv2.COLOR_RGB2BGR))
             
             # inference to gr00t server
             print(f"Simulation {simulation_num} step {step} calling gr00t inference")
             gr00t_inference_input = gr1_gr00t_utils.make_gr00t_input(task=PROMPT, obs=obs[:,:,:3], joint_positions=current_joint_positions)
             gr00t_output = gr1_gr00t_utils.request_gr00t_inference(payload=gr00t_inference_input, url="http://localhost:9876/inference")
             
-            for timestep in range(16):
+            for timestep in range(0, 16):
                 action_joint_position = gr1_gr00t_utils.make_joint_position_from_gr00t_output(gr00t_output, timestep=timestep)
                 gr1_articulation_controller.apply_action(ArticulationAction(joint_positions=action_joint_position))
                 world.step(render=True)
-                        
+                obs: np.ndarray = camera.get_rgba()
+                video.write(cv2.cvtColor(obs[:,:,:3], cv2.COLOR_RGB2BGR))
+        
         print(f"Simulation {simulation_num} finished")
+        
+    video.release()    
     simulation_app.close()
     
     

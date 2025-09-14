@@ -41,4 +41,28 @@ def make_joint_position_from_gr00t_output(output: dict, timestep=1) -> np.ndarra
     for joint_part_name, actions in output.items():
         gr1_joint_part_name = joint_part_name[7:] # remove the action part
         joint_positions[gr1_config.gr00t_joints_index[gr1_joint_part_name]] = np.array(actions[timestep], dtype = float) # move to t + 1
+    
+    
+    # if timestep == 1:
+    #     print("action joint position")
+    #     print(joint_positions)
+    
+    # account for mimic joints
+    # left hand
+    # joint_positions[42] = joint_positions[32]
+    # joint_positions[43] = joint_positions[33]
+    # joint_positions[45] = joint_positions[35]
+    # joint_positions[44] = joint_positions[34]
+    # joint_positions[52] = joint_positions[36] # thumb?
+    
+    # # right hand
+    # joint_positions[47] = joint_positions[37]
+    # joint_positions[48] = joint_positions[38]
+    # joint_positions[50] = joint_positions[40]
+    # joint_positions[49] = joint_positions[39]
+    # joint_positions[53] = joint_positions[41] # thumb?
+    
+    
+
+    
     return joint_positions
