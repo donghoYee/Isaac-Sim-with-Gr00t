@@ -53,7 +53,7 @@ def main():
         translation=np.array([0.13, 0.0, 0.07]),
         frequency=60,
         resolution=(256, 200),
-        orientation=rot_utils.euler_angles_to_quats(np.array([0, 70, 0]), degrees=True),
+        orientation=rot_utils.euler_angles_to_quats(np.array([0, 60, 0]), degrees=True),
     )
     camera.set_focal_length(1.0) # smaller => wider range of view
     camera.set_clipping_range(0.1, 2)
