@@ -1,0 +1,43 @@
+{
+  "os":  "Linux-6.14.0-29-generic-x86_64-with-glibc2.39",
+  "python":  "3.10.0",
+  "startedAt":  "2025-09-30T02:42:36.000228Z",
+  "program":  "/home/daniel/RFM/projects/gr00t/run_finetune.py",
+  "codePath":  "run_finetune.py",
+  "git":  {
+    "remote":  "https://github.com/donghoYee/Isaac-Sim-with-Gr00t.git",
+    "commit":  "d2cf67fadf9b41705d8b60ac7ff39eb89316bbef"
+  },
+  "email":  "dongho0127@snu.ac.kr",
+  "root":  "/home/daniel/RFM/projects/gr00t",
+  "host":  "daniel-home",
+  "username":  "daniel",
+  "executable":  "/home/daniel/anaconda3/envs/gr00t/bin/python",
+  "codePathLocal":  "run_finetune.py",
+  "cpu_count":  24,
+  "cpu_count_logical":  32,
+  "gpu":  "[NVIDIA GeForce RTX 3090 Ti]",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "982240026624",
+      "used":  "489729069056"
+    }
+  },
+  "memory":  {
+    "total":  "67177209856"
+  },
+  "cpu":  {
+    "count":  24,
+    "countLogical":  32
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 3090 Ti",
+      "memoryTotal":  "25757220864",
+      "cudaCores":  10752,
+      "architecture":  "Ampere"
+    }
+  ],
+  "cudaVersion":  "12.9"
+}

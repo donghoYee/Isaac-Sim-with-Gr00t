@@ -1,0 +1,18 @@
+{"time":"2025-09-30T11:36:53.760478735+09:00","level":"INFO","msg":"using version","core version":"0.18.0"}
+{"time":"2025-09-30T11:36:53.760487805+09:00","level":"INFO","msg":"created symlink","path":"/home/daniel/RFM/projects/gr00t/wandb/run-20250930_113653-vpmzdrxq/logs/debug-core.log"}
+{"time":"2025-09-30T11:36:53.760516642+09:00","level":"INFO","msg":"using version","core version":"0.18.0"}
+{"time":"2025-09-30T11:36:53.760519896+09:00","level":"INFO","msg":"created symlink","path":"/home/daniel/RFM/projects/gr00t/wandb/run-20250930_113653-vpmzdrxq/logs/debug-core.log"}
+{"time":"2025-09-30T11:36:53.762660122+09:00","level":"INFO","msg":"created new stream","id":"vpmzdrxq"}
+{"time":"2025-09-30T11:36:53.76267076+09:00","level":"INFO","msg":"stream: started","id":"vpmzdrxq"}
+{"time":"2025-09-30T11:36:53.762678081+09:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"vpmzdrxq"}}
+{"time":"2025-09-30T11:36:53.762683614+09:00","level":"INFO","msg":"sender: started","stream_id":{"value":"vpmzdrxq"}}
+{"time":"2025-09-30T11:36:53.762704722+09:00","level":"INFO","msg":"handler: started","stream_id":{"value":"vpmzdrxq"}}
+{"time":"2025-09-30T11:36:54.057199135+09:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-09-30T11:36:54.057665362+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-09-30T11:37:00.689776607+09:00","level":"INFO","msg":"stream: closing","id":"vpmzdrxq"}
+{"time":"2025-09-30T11:37:00.689791052+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-09-30T11:37:00.689909889+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-09-30T11:37:03.705285902+09:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"vpmzdrxq"}}
+{"time":"2025-09-30T11:37:03.705315097+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"vpmzdrxq"}}
+{"time":"2025-09-30T11:37:03.705327727+09:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"vpmzdrxq"}}
+{"time":"2025-09-30T11:37:03.705365372+09:00","level":"INFO","msg":"stream: closed","id":"vpmzdrxq"}

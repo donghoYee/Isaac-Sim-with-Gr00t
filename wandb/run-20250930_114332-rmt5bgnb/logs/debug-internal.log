@@ -1,0 +1,18 @@
+{"time":"2025-09-30T11:43:32.587186935+09:00","level":"INFO","msg":"using version","core version":"0.18.0"}
+{"time":"2025-09-30T11:43:32.587191951+09:00","level":"INFO","msg":"created symlink","path":"/home/daniel/RFM/projects/gr00t/wandb/run-20250930_114332-rmt5bgnb/logs/debug-core.log"}
+{"time":"2025-09-30T11:43:32.587206368+09:00","level":"INFO","msg":"using version","core version":"0.18.0"}
+{"time":"2025-09-30T11:43:32.587207815+09:00","level":"INFO","msg":"created symlink","path":"/home/daniel/RFM/projects/gr00t/wandb/run-20250930_114332-rmt5bgnb/logs/debug-core.log"}
+{"time":"2025-09-30T11:43:32.588234632+09:00","level":"INFO","msg":"created new stream","id":"rmt5bgnb"}
+{"time":"2025-09-30T11:43:32.58823984+09:00","level":"INFO","msg":"stream: started","id":"rmt5bgnb"}
+{"time":"2025-09-30T11:43:32.588249648+09:00","level":"INFO","msg":"handler: started","stream_id":{"value":"rmt5bgnb"}}
+{"time":"2025-09-30T11:43:32.588258001+09:00","level":"INFO","msg":"sender: started","stream_id":{"value":"rmt5bgnb"}}
+{"time":"2025-09-30T11:43:32.588284574+09:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"rmt5bgnb"}}
+{"time":"2025-09-30T11:43:32.829921313+09:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-09-30T11:43:32.830396299+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-09-30T11:43:45.187701527+09:00","level":"INFO","msg":"stream: closing","id":"rmt5bgnb"}
+{"time":"2025-09-30T11:43:45.187721484+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-09-30T11:43:45.187841594+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-09-30T11:43:46.374006123+09:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"rmt5bgnb"}}
+{"time":"2025-09-30T11:43:46.374033623+09:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"rmt5bgnb"}}
+{"time":"2025-09-30T11:43:46.374027042+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"rmt5bgnb"}}
+{"time":"2025-09-30T11:43:46.374083612+09:00","level":"INFO","msg":"stream: closed","id":"rmt5bgnb"}
