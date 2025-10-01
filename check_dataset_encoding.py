@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 
 DATASET_PATH = "/media/daniel/new_disk/RFM/datasets/gr1_arms_only.Nut_pouring_task"
 EMBODIMENT_TAG = "gr1"
-VIDEO_BACKEND = "decord"
-#VIDEO_BACKEND = "torchvision_av"
+#VIDEO_BACKEND = "decord"
+VIDEO_BACKEND = "torchvision_av"
 data_config = DATA_CONFIG_MAP["fourier_gr1_arms_only"]
 
 

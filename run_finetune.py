@@ -19,15 +19,15 @@ TUNE_LLM = False
 TUNE_VISUAL = False          
 TUNE_PROJECTOR = True      
 TUNE_DIFFUSION_MODEL = False 
-DATASET_PATH = "/media/daniel/new_disk/RFM/datasets/gr1_arms_only.Nut_pouring_task"
+DATASET_PATH = "/media/daniel/new_disk/RFM/datasets/gr1_arms_only.Exhaust_pipe_sorting_task"
 DATASET_VIDEO_BACKEND = "decord" # torchvision_av #this is important!
 MODEL_COMPUTE_DTYPE = "bfloat16"
-FINETUNED_OUTPUT_DIRECTORY = "/media/daniel/new_disk/RFM/datasets/gr1_arms_only.Nut_pouring_batch32_nodiffusion"
+FINETUNED_OUTPUT_DIRECTORY = "/media/daniel/new_disk/RFM/models/gr1_arms_only.Exhaust_pipe_sort_batch32_nodiffusion"
 BATCH_SIZE = 32
 MAX_STEPS = 40000
 SAVE_STEPS = 10000 # save the model in this steps
 GRADIENT_ACCUMULATION_STEPS = 4
-RUN_NAME = "gr1_arms_only.Nut_pouring_batch32_nodiffusion" # for reporting to wandb
+RUN_NAME = "gr1_arms_only.Exhaust_pipe_sort_batch32_nodiffusion" # for reporting to wandb
 LEARNING_RATE = 1e-4
 
 

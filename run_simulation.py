@@ -6,9 +6,9 @@ from isaacsim import SimulationApp
 # here are the parameters
 EPISODE_NUM = 2
 EACH_EPISODE_LEN = 30
-RESULT_VIDEO_FILE = "./results/ExhaustPipe_plus_NutPouring_batch32_pipe_nut.mp4"
-#LOAD_WORLD_FILE = "./environments/gr1_NutPouring.usd"
-LOAD_WORLD_FILE = "./environments/gr1_exhaust_pipe.usd"
+RESULT_VIDEO_FILE = "./results/NutPouring_batch32_nodiffusion.mp4"
+LOAD_WORLD_FILE = "./environments/gr1_NutPouring.usd"
+#LOAD_WORLD_FILE = "./environments/gr1_exhaust_pipe.usd"
 
 TASK = "Pick up the red beaker and tilt it to pour out 1 green nut into yellow bowl. Pick up the yellow bowl and place it on the metallic measuring scale."
 #TASK = "Pickup the blue pipe and place it into the blue bin." # Exhaust Pipe task

@@ -10,7 +10,7 @@ from gr00t.model.policy import Gr00tPolicy
 from gr00t.experiment.data_config import DATA_CONFIG_MAP
 
 # Gr00t initialize
-MODEL_PATH = "/media/daniel/new_disk/RFM/datasets/gr1_arms_only.Nut_pouring_batch32_nodiffusion"
+MODEL_PATH = "/media/daniel/new_disk/RFM/models/gr1_arms_only.Nut_pouring_batch32_nodiffusion/checkpoint-10000"
 EMBODIMENT_TAG = "gr1"
 EMBODIMENT_CONFIG = "fourier_gr1_arms_only"
 
